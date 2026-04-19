@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://localhost:5000/api"
+const BACKEND_URL = "https://artifai.onrender.com/api"
 
 export async function enhancePrompt(rawPrompt, style) {
   const res = await fetch(`${BACKEND_URL}/enhance-prompt`, {

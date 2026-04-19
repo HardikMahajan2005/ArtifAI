@@ -107,7 +107,28 @@ body::after {
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: filter 0.5s ease;
 }
+
+/* Blur entire app when user logs out with image visible */
+.app--blurred > *:not(.blur-lock) {
+  filter: blur(12px) brightness(0.4);
+  pointer-events: none;
+  user-select: none;
+  transition: filter 0.5s ease;
+}
+
+/* Blur lock overlay — sits on top of blurred content */
+.blur-lock {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
 
 .main {
   flex: 1;
@@ -127,7 +148,11 @@ body::after {
   cursor: pointer;
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* Use specific properties instead of 'all' to avoid stacking context pollution */
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              opacity 0.3s ease,
+              filter 0.3s ease;
 }
 
 .btn:disabled {
@@ -146,39 +171,29 @@ body::after {
   font-size: 16px;
   font-weight: 600;
   width: 100%;
-  position: relative;
-  overflow: hidden;
+  /* No position:relative, no overflow:hidden — avoids the ::before bleed bug */
   box-shadow:
     0 4px 24px rgba(139, 92, 246, 0.35),
     0 1px 0 rgba(255, 255, 255, 0.15) inset;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #a78bfa, #818cf8, #60a5fa);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
+  transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.25s ease,
+              filter 0.25s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
+  filter: brightness(1.15);
   box-shadow:
     0 10px 36px rgba(139, 92, 246, 0.5),
     0 4px 12px rgba(59, 130, 246, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-primary:hover:not(:disabled)::before {
-  opacity: 1;
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  filter: brightness(1.05);
 }
 
-.btn-primary > * {
-  position: relative;
-  z-index: 2;
-}
 
 /* ── Keyframes ── */
 @keyframes spin {

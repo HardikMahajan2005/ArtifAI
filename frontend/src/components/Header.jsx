@@ -3,9 +3,18 @@ import { useAuth } from "../context/AuthContext"
 import LoginModal from "./LoginModal"
 import "./Header.css"
 
-export default function Header() {
+export default function Header({ onLogout }) {
   const { currentUser, logout } = useAuth()
   const [showModal, setShowModal] = useState(false)
+
+  const handleLogout = () => {
+    // Delegate to parent so App can decide whether to blur
+    if (onLogout) {
+      onLogout(logout)
+    } else {
+      logout()
+    }
+  }
 
   return (
     <>
@@ -25,7 +34,10 @@ export default function Header() {
                     className="header__avatar"
                     referrerPolicy="no-referrer"
                   />
-                  <button className="header__auth-btn header__auth-btn--logout" onClick={logout}>
+                  <span className="header__display-name">
+                    {currentUser.displayName?.split(" ")[0]}
+                  </span>
+                  <button className="header__auth-btn header__auth-btn--logout" onClick={handleLogout}>
                     Logout
                   </button>
                 </div>

@@ -79,6 +79,16 @@
   object-fit: cover;
 }
 
+.header__display-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Shared button base */
 .header__auth-btn {
   display: flex;
