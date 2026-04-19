@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://artifai.onrender.com/api"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL 
 
 export async function enhancePrompt(rawPrompt, style) {
   const res = await fetch(`${BACKEND_URL}/enhance-prompt`, {
