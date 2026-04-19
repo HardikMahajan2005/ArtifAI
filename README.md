@@ -77,10 +77,10 @@ npm install
 Create a `.env` file in the `frontend` directory:
 ```env
 VITE_FIREBASE_API_KEY="your_api_key_here"
-VITE_FIREBASE_AUTH_DOMAIN="arifai-9c435.firebaseapp.com"
-VITE_FIREBASE_PROJECT_ID="arifai-9c435"
-VITE_FIREBASE_STORAGE_BUCKET="arifai-9c435.firebasestorage.app"
-VITE_FIREBASE_MESSAGING_SENDER_ID="830843726178"
+VITE_FIREBASE_AUTH_DOMAIN=""
+VITE_FIREBASE_PROJECT_ID=""
+VITE_FIREBASE_STORAGE_BUCKET=""
+VITE_FIREBASE_MESSAGING_SENDER_ID=""
 VITE_FIREBASE_APP_ID="your_app_id"
 VITE_BACKEND_URL="http://localhost:5000/api"
 ```
